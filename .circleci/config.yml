@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Create Release
           command: |
-            cd deploy
+            cd config/deploy
             node create-release.js
 
 
