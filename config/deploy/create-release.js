@@ -61,7 +61,7 @@ const currentVersion = octokit.repos.getLatestRelease({
   owner,
   repo,
 }).then(response => {
-  console.log("currentVersion:", response.name);
+  console.log("latestVersionResponse:", response);
   return response.name.split('.');
 }).catch(error => {
   console.log("octokitError", error);
