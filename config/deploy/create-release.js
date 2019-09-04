@@ -62,6 +62,9 @@ const lastRelease = octokit.repos.getLatestRelease({
   owner,
   repo,
 });
+
+console.log('lastRelease:', lastRelease);
+
 const currentVersion = lastRelease.name.split('.');
 
 let newVersion = '';
