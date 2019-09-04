@@ -82,4 +82,6 @@ octokit.repos.getLatestRelease({
     draft: false,
     prerelease: false,
   });
+}).catch(error => {
+  console.log(error);
 });
