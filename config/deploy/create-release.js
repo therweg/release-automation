@@ -57,32 +57,32 @@ const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
 const owner = 'therweg';
 const repo = 'release-automation';
 
-const currentVersion = octokit.repos.getLatestRelease({
+octokit.repos.getLatestRelease({
   owner,
   repo,
 }).then(response => {
-  console.log('LatestVersionResponse:, response');
-  return response.name.split('.');
+  console.log('LatestVersionResponse:', response);
+  const currentVersion = response.name.split('.');
+
+  console.log('currentVersion:', currentVersion);
+
+  let newVersion = '';
+  if (data.feature !== undefined) {
+    newVersion = `${currentVersion[0]}.${parseInt(currentVersion[1], 10) + 1}.${currentVersion[2]}`;
+  } else {
+    newVersion = `${currentVersion[0]}.${currentVersion[1]}.${parseInt(currentVersion[2], 10) + 1}`;
+  }
+
+  octokit.repos.createRelease({
+    owner,
+    repo,
+    tag_name: `v${newVersion}`,
+    target_commitish: git.long(),
+    name: newVersion,
+    body,
+    draft: false,
+    prerelease: false,
+  });
 }).catch(error => {
   console.log("octokitError", error);
-});
-
-console.log('currentVersion:', currentVersion);
-
-let newVersion = '';
-if (data.feature !== undefined) {
-  newVersion = `${currentVersion[0]}.${parseInt(currentVersion[1], 10) + 1}.${currentVersion[2]}`;
-} else {
-  newVersion = `${currentVersion[0]}.${currentVersion[1]}.${parseInt(currentVersion[2], 10) + 1}`;
-}
-
-octokit.repos.createRelease({
-  owner,
-  repo,
-  tag_name: `v${newVersion}`,
-  target_commitish: git.long(),
-  name: newVersion,
-  body,
-  draft: false,
-  prerelease: false,
 });
