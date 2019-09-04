@@ -68,7 +68,7 @@ octokit.repos.getLatestRelease({
 
   let newVersion = '';
   if (data.feature !== undefined) {
-    newVersion = `${currentVersion[0]}.${parseInt(currentVersion[1], 10) + 1}.${currentVersion[2]}`;
+    newVersion = `${currentVersion[0]}.${parseInt(currentVersion[1], 10) + 1}.0`;
   } else {
     newVersion = `${currentVersion[0]}.${currentVersion[1]}.${parseInt(currentVersion[2], 10) + 1}`;
   }
