@@ -61,8 +61,8 @@ octokit.repos.getLatestRelease({
   owner,
   repo,
 }).then(response => {
-  console.log('LatestVersionResponse:', response);
-  const currentVersion = response.name.split('.');
+  console.log('LatestVersionResponse:', response.data);
+  const currentVersion = response.data.name.split('.');
 
   console.log('currentVersion:', currentVersion);
 
