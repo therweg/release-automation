@@ -61,11 +61,13 @@ const currentVersion = octokit.repos.getLatestRelease({
   owner,
   repo,
 }).then(response => {
-  console.log("latestVersionResponse:", response);
+  console.log('LatestVersionResponse:, response');
   return response.name.split('.');
 }).catch(error => {
   console.log("octokitError", error);
 });
+
+console.log('currentVersion:', currentVersion);
 
 let newVersion = '';
 if (data.feature !== undefined) {
