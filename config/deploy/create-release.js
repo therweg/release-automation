@@ -58,7 +58,7 @@ const octokit = new Octokit({ auth: 'e32530ba394850ec122be6a24644ec814f625b43' }
 const owner = 'therweg';
 const repo = 'release-automation';
 
-const lastRelease = octokit.repos.getLatestRelease({
+const lastRelease = await octokit.repos.getLatestRelease({
   owner,
   repo,
 });
