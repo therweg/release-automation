@@ -53,7 +53,7 @@ Object.keys(data).forEach((key) => {
 
 console.log('body: ', body);
 
-const octokit = new Octokit({ auth: '5ffcaf39c9a3cb96a34cca774300016a8187cf54' });
+const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
 const owner = 'therweg';
 const repo = 'release-automation';
 
