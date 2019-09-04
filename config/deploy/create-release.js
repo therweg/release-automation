@@ -16,6 +16,21 @@ function getSection(name) {
   }
 }
 
+async function getNewestRelease() {
+  const octokit = new Octokit({ auth: 'e32530ba394850ec122be6a24644ec814f625b43' });
+  const owner = 'therweg';
+  const repo = 'release-automation';
+
+  const lastRelease = await octokit.repos.getLatestRelease({
+    owner,
+    repo,
+  });
+
+  console.log('lastRelease:', lastRelease);
+
+  return lastRelease.name.split('.');
+}
+
 // if we need to access branch name in the future, we can grab it with the following:
 // const branchName = git.branch();
 const commitMsg = git.message();
@@ -58,14 +73,7 @@ const octokit = new Octokit({ auth: 'e32530ba394850ec122be6a24644ec814f625b43' }
 const owner = 'therweg';
 const repo = 'release-automation';
 
-const lastRelease = await octokit.repos.getLatestRelease({
-  owner,
-  repo,
-});
-
-console.log('lastRelease:', lastRelease);
-
-const currentVersion = lastRelease.name.split('.');
+const currentVersion = getNewestRelease();
 
 let newVersion = '';
 if (data.feature !== undefined) {
