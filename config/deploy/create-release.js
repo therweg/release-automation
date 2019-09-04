@@ -57,6 +57,11 @@ const octokit = new Octokit({ auth: 'e32530ba394850ec122be6a24644ec814f625b43' }
 const owner = 'therweg';
 const repo = 'release-automation';
 
+octokit.authenticate({
+  type: 'token',
+  token: 'e32530ba394850ec122be6a24644ec814f625b43'
+});
+
 const currentVersion = octokit.repos.getLatestRelease({
   owner,
   repo,
